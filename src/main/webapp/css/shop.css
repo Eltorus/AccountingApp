@@ -1,0 +1,125 @@
+body {
+	padding-top: 70px;
+	/* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+}
+
+.slide-image {
+	width: 100%;
+}
+
+.carousel-holder {
+	margin-bottom: 30px;
+}
+
+.carousel-control, .item {
+	border-radius: 4px;
+}
+
+.caption {
+	height: 130px;
+	overflow: hidden;
+}
+
+.caption h4 {
+	white-space: nowrap;
+}
+
+.ratings {
+	padding-right: 10px;
+	padding-left: 10px;
+	color: #d17581;
+}
+
+.thumbnail {
+	padding: 0;
+}
+
+.thumbnail .caption-full {
+	padding: 9px;
+	color: #333;
+}
+
+footer {
+	margin: 50px 0;
+}
+
+.btn-link {
+	height: 50px;
+	padding-top: 15px;
+	padding-right: 15px;
+	padding-bottom: 15px;
+	padding-left: 15px;
+	border-top-width: 0px;
+	border-right-width: 0px;
+	border-bottom-width: 0px;
+	border-left-width: 0px;
+}
+
+.details-table {
+	display: none;
+	width: 50%;
+	float: right;
+	background-color: lightsteelblue;
+}
+
+.img-div {
+	height: 110px;
+	width: 110px;
+	overflow: hidden;
+}
+
+img.product {
+	width: 100%;
+	height: 100%;
+	object-fit: contain;
+	margin: auto;
+	left: 0;
+	right: 0;
+}
+
+.product-pict {
+	height: 200px;
+	width: 100%;
+	overflow: hidden;
+}
+
+.product-pict a {
+	display: block;
+	height: 100%;
+}
+
+.product-pict:hover, .avatar:hover img {
+	opacity: 0.8;
+}
+
+.thumbnail img {
+	max-height: 100%;
+	max-width: 100%;
+}
+
+.caption {
+	height: auto;
+	overflow: hidden;
+}
+
+.pr-badge {
+	float: right;
+}
+
+.carousel {
+	height: 30vw;
+	max-height: 30vw;
+	overflow: hidden;
+	position: relative;
+	width: 80%;
+	margin: 0 auto;
+}
+
+.carousel-inner>.item>img, .carousel-inner>.item>a>img {
+	width: 100%;
+	margin: auto;
+}
+
+.navbar-btn {
+	margin-left: 15px;
+}
