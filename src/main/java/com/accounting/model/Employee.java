@@ -1,7 +1,7 @@
 package com.accounting.model;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -34,20 +34,23 @@ public class Employee implements Serializable {
   @Column(name = "position")
   private String position;
 
-  @Column(name = "expirience", insertable = false)
-  private Date expirience;
+  @Column(name = "experience", insertable = false)
+  private Date experience;
+  
+  @Column(name = "home_address")
+  private String homeAddress;
 
   @Column(name = "admin", insertable = false)
   private boolean admin;
-
+  
   public Employee() {}
 
-  public Employee(long id, String email, String passwordHash, boolean admin) {
-    super();
-    this.id = id;
+  public Employee(String email, String passwordHash, String fullName, Date birth, String position) {
     this.email = email;
     this.passwordHash = passwordHash;
-    this.admin = admin;
+    this.fullName = fullName;
+    this.birth = birth;
+    this.position = position;
   }
 
   public long getId() {
@@ -98,12 +101,20 @@ public class Employee implements Serializable {
     this.position = position;
   }
 
-  public Date getExpirience() {
-    return expirience;
+  public Date getExperience() {
+    return experience;
   }
 
-  public void setExpirience(Date expirience) {
-    this.expirience = expirience;
+  public void setExperience(Date experience) {
+    this.experience = experience;
+  }
+
+  public String getHomeAddress() {
+    return homeAddress;
+  }
+
+  public void setHomeAddress(String homeAddress) {
+    this.homeAddress = homeAddress;
   }
 
   public boolean isAdmin() {
@@ -113,6 +124,8 @@ public class Employee implements Serializable {
   public void setAdmin(boolean admin) {
     this.admin = admin;
   }
+  
+  
 
   @Override
   public int hashCode() {
@@ -121,8 +134,9 @@ public class Employee implements Serializable {
     result = prime * result + (admin ? 1231 : 1237);
     result = prime * result + ((birth == null) ? 0 : birth.hashCode());
     result = prime * result + ((email == null) ? 0 : email.hashCode());
-    result = prime * result + ((expirience == null) ? 0 : expirience.hashCode());
+    result = prime * result + ((experience == null) ? 0 : experience.hashCode());
     result = prime * result + ((fullName == null) ? 0 : fullName.hashCode());
+    result = prime * result + ((homeAddress == null) ? 0 : homeAddress.hashCode());
     result = prime * result + (int) (id ^ (id >>> 32));
     result = prime * result + ((passwordHash == null) ? 0 : passwordHash.hashCode());
     result = prime * result + ((position == null) ? 0 : position.hashCode());
@@ -158,11 +172,11 @@ public class Employee implements Serializable {
     } else if (!email.equals(other.email)) {
       return false;
     }
-    if (expirience == null) {
-      if (other.expirience != null) {
+    if (experience == null) {
+      if (other.experience != null) {
         return false;
       }
-    } else if (!expirience.equals(other.expirience)) {
+    } else if (!experience.equals(other.experience)) {
       return false;
     }
     if (fullName == null) {
@@ -170,6 +184,13 @@ public class Employee implements Serializable {
         return false;
       }
     } else if (!fullName.equals(other.fullName)) {
+      return false;
+    }
+    if (homeAddress == null) {
+      if (other.homeAddress != null) {
+        return false;
+      }
+    } else if (!homeAddress.equals(other.homeAddress)) {
       return false;
     }
     if (id != other.id) {
@@ -194,8 +215,9 @@ public class Employee implements Serializable {
 
   @Override
   public String toString() {
-    return "Employee [id=" + id + ", email=" + email + ", fullName=" + fullName + ", birth=" + birth
-        + ", position=" + position + ", expirience=" + expirience + ", admin=" + admin + "]";
+    return "Employee [id=" + id + ", email=" + email + ", passwordHash=" + passwordHash
+        + ", fullName=" + fullName + ", birth=" + birth + ", position=" + position + ", experience="
+        + experience + ", homeAddress=" + homeAddress + ", admin=" + admin + "]";
   }
-
+  
 }

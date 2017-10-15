@@ -1,14 +1,10 @@
 package com.accounting.dao;
 
 import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
 import com.accounting.dao.util.HibernateUtil;
 import com.accounting.model.Employee;
 
 public class EmployeeDaoImpl implements EmployeeDao {
-
-  private EntityManager em = HibernateUtil.getEntityManager();
 
   @Override
   public boolean addEmployee(Employee employee) {

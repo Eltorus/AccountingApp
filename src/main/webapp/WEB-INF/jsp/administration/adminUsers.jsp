@@ -18,41 +18,31 @@
 	</c:if>
 	<%@ include file="/WEB-INF/elements/header.jspf"%>
 	<div class="container-fluid">
-		<ul class="nav nav-tabs">
-			<li role="presentation"><a href="Controller?command=admin_order_page">${orders_loc}</a></li>
-			<li role="presentation"><a href="Controller?command=admin_product_page">${products_loc}</a></li>
-			<li role="presentation" class="active"><a href="Controller?command=admin_user_page">${users_loc}</a></li>
-		</ul>
 		<div class="table-responsive">
 			<table class="table table-sm table-hover" id="users-table">
 				<thead>
 					<tr>
 						<th>ID</th>
-						<th>${name},${surname}</th>
-						<th>${email}</th>
-						<th>${phonenumber}</th>
-						<th>${access_level}</th>
-						<th>${discount}</th>
-						<th>${ban_status}</th>
-						<th></th>
+						<th>Full Name</th>
+						<th>Email</th>
+						<th>Birth Date</th>
+						<th>Position</th>
+						<th>Experience</th>
+						<th>Home Address</th>
+						<th>Admin</th>
 					</tr>
 				</thead>
 				<tbody>
 					<c:forEach items="${requestScope.userList}" var="user" varStatus="i">
 						<tr>
 							<td>${user.id}</td>
-							<td><c:out value="${user.name} ${user.surname}" /></td>
+							<td><c:out value="${user.fullName}" /></td>
 							<td>${user.email}</td>
-							<td>${user.phonenumber}</td>
-							<td><c:choose>
-									<c:when test="${user.admin == true}">
-														${admin_loc}
-													</c:when>
-									<c:otherwise>
-														${user_loc}
-													</c:otherwise>
-								</c:choose></td>
-							<td>${user.discountCoefficient * 100}%</td>
+							<td>${user.birth}</td>
+							<td>${user.position}</td>
+							<td>${user.experience}</td>
+							<td>${user.homeAddress}</td>
+							<td>${user.admin}"></td>
 							<td>
 								<form action="Controller" method="post">
 									<input type="hidden" name="command" value="update_ban_status" /> <input type="hidden" name="user_id" value="${user.id}" /> <input

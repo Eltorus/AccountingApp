@@ -4,9 +4,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.accounting.command.AttributeList;
 import com.accounting.command.Command;
+import com.accounting.command.EmployeeValidation;
 import com.accounting.command.PageList;
 import com.accounting.command.ParameterList;
-import com.accounting.command.Validation;
 import com.accounting.command.exception.CommandException;
 import com.accounting.model.Employee;
 import com.accounting.service.EmployeeService;
@@ -21,7 +21,7 @@ public class UpdateUserCommand implements Command {
     String id = req.getParameter(ParameterList.ID);
     Employee employee = (Employee) req.getSession().getAttribute(AttributeList.ATTR_USER);
 
-    if(Validation.isStringEmpty(id)) {
+    if(EmployeeValidation.isStringEmpty(id)) {
       return PageList.WRONG_INPUT;      
     }
     
