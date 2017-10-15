@@ -10,6 +10,7 @@ import com.accounting.command.exception.CommandException;
 import com.accounting.model.Employee;
 import com.accounting.service.EmployeeService;
 import com.accounting.service.ServiceFactory;
+import com.accounting.service.exception.ServiceException;
 import com.accounting.util.exception.UtilException;
 
 public class SignUpCommand implements Command {
@@ -27,7 +28,7 @@ public class SignUpCommand implements Command {
         }
       } 
         return PageList.WRONG_INPUT;
-    } catch (UtilException e) {
+    } catch (UtilException | ServiceException e) {
       // TODO: logging
       return PageList.ERROR;
     }

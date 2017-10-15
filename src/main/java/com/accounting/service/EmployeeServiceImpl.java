@@ -3,38 +3,70 @@ package com.accounting.service;
 import java.util.List;
 import com.accounting.dao.DaoFactory;
 import com.accounting.dao.EmployeeDao;
+import com.accounting.dao.exception.DaoException;
 import com.accounting.model.Employee;
+import com.accounting.service.exception.ServiceException;
 
 public class EmployeeServiceImpl implements EmployeeService {
   
   private EmployeeDao employeeDao = DaoFactory.getInstance().getEmployeeDao();
   
+  //TODO: add validation 
   @Override
-  public Employee signIn(Employee employee) {
-    return employeeDao.getEmployeeByEmailAndPswrd(employee);
+  public Employee signIn(Employee employee) throws ServiceException {
+    try {
+      return employeeDao.getEmployeeByEmailAndPswrd(employee);
+    } catch (DaoException e) {
+      throw new ServiceException("Excpetion during signIn", e);
+    }
   }
 
   @Override
-  public boolean signUp(Employee employee) {
-    return employeeDao.addEmployee(employee);
+  public boolean signUp(Employee employee) throws ServiceException {
+    try {
+      return employeeDao.addEmployee(employee);
+    } catch (DaoException e) {
+      throw new ServiceException("Excpetion during signUp", e);
+    }
   }
 
   @Override
-  public void updateEmployee(Employee employee) {
-    employeeDao.updateEmployee(employee);    
+  public boolean updateEmployee(Employee employee) throws ServiceException {
+    try {
+      return employeeDao.updateEmployee(employee);
+    } catch (DaoException e) {
+      throw new ServiceException("Excpetion during updateEmployee", e);
+    }    
   }
 
   @Override
-  public void deleteEmployee(Employee employee) {
-     employeeDao.deleteEmployee(employee);    
+  public boolean deleteEmployee(Employee employee) throws ServiceException {
+     try {
+      return employeeDao.deleteEmployee(employee);
+    } catch (DaoException e) {
+      throw new ServiceException("Excpetion during deleteEmployee", e);
+    }    
   }
 
   @Override
-  public List<Employee> getAllEmployees() {
-    return employeeDao.getAllEmployees();
+  public List<Employee> getAllEmployees() throws ServiceException {
+    try {
+      return employeeDao.getAllEmployees();
+    } catch (DaoException e) {
+      throw new ServiceException("Excpetion during getAllEmployees", e);
+    }
   }
   
-  public static void main(String[] args) {
+  @Override
+  public Employee getEmployeeById(Employee employee) throws ServiceException {
+    try {
+      return employeeDao.getEmployeeById(employee);
+    } catch (DaoException e) {
+      throw new ServiceException("Excpetion during getEmployeeById", e);
+    }
+  }
+  
+/*  public static void main(String[] args) {
     EmployeeService service = new EmployeeServiceImpl();
     Employee employee1 = new Employee();
     employee1.setEmail("Liom@e");
@@ -59,16 +91,6 @@ public class EmployeeServiceImpl implements EmployeeService {
     
     System.out.println(service.signIn(employee1));
     System.out.println(service.signIn(employee2));
-  }
-
-  @Override
-  public void deleteEmployeeByEmail(Employee employee) {
-    employeeDao.deleteEmployeeByEmail(employee);
-  }
-
-  @Override
-  public Employee getEmployeeById(Employee employee) {
-    return employeeDao.getEmployeeById(employee);
-  }
+  }*/
 
 }

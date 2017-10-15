@@ -2,47 +2,21 @@ package com.accounting.model;
 
 import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
 
-@Entity
-@Table(name = "employees")
 public class Employee implements Serializable {
 
   private static final long serialVersionUID = -8043746569735508075L;
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
   private long id;
-
-  @Column(name = "email")
   private String email;
-
-  @Column(name = "password")
   private String passwordHash;
-
-  @Column(name = "full_name")
   private String fullName;
-
-  @Column(name = "birth", insertable = false)
   private Date birth;
-
-  @Column(name = "position")
   private String position;
-
-  @Column(name = "experience", insertable = false)
   private Date experience;
-  
-  @Column(name = "home_address")
   private String homeAddress;
-
-  @Column(name = "admin", insertable = false)
   private boolean admin;
-  
+
   public Employee() {}
 
   public Employee(String email, String passwordHash, String fullName, Date birth, String position) {
@@ -124,8 +98,8 @@ public class Employee implements Serializable {
   public void setAdmin(boolean admin) {
     this.admin = admin;
   }
-  
-  
+
+
 
   @Override
   public int hashCode() {
@@ -219,5 +193,5 @@ public class Employee implements Serializable {
         + ", fullName=" + fullName + ", birth=" + birth + ", position=" + position + ", experience="
         + experience + ", homeAddress=" + homeAddress + ", admin=" + admin + "]";
   }
-  
+
 }

@@ -5,7 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import com.accounting.util.exception.UtilException;
 
-public class DateFormatter {
+public class DateUtil {
 
   public static String convertDateToString(Date date) {
     if (date == null) {
@@ -33,5 +33,14 @@ public class DateFormatter {
     } catch (ParseException e) {
       throw new UtilException(e);
     }
+  }
+  
+  public static Date getDifferenceBetweenDates(Date date1, Date date2) {
+    return new Date(date2.getTime() - date1.getTime());
+  }
+  
+  public static Date getTimePastFromDate(String string) throws UtilException {
+    Date date1 = convertStringToDate(string);
+    return new Date(new Date().getTime() - date1.getTime());
   }
 }

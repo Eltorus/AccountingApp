@@ -1,11 +1,10 @@
 package com.accounting.command;
 
-import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.servlet.http.HttpServletRequest;
 import com.accounting.model.Employee;
-import com.accounting.util.DateFormatter;
+import com.accounting.util.DateUtil;
 import com.accounting.util.HashTool;
 import com.accounting.util.exception.UtilException;
 
@@ -66,7 +65,7 @@ public class EmployeeValidation {
     }
 
     Employee employee = new Employee(email.trim(), HashTool.hashLine(password.trim()), name,
-        DateFormatter.getDateRusFormat(birthDate), position.trim());
+        DateUtil.getDateRusFormat(birthDate), position.trim());
     employee.setHomeAddress(homeAddress.trim());
     return employee;
   }

@@ -11,6 +11,7 @@ import com.accounting.command.exception.CommandException;
 import com.accounting.model.Employee;
 import com.accounting.service.EmployeeService;
 import com.accounting.service.ServiceFactory;
+import com.accounting.service.exception.ServiceException;
 
 public class UpdateUserCommand implements Command {
 
@@ -21,25 +22,29 @@ public class UpdateUserCommand implements Command {
     String id = req.getParameter(ParameterList.ID);
     Employee employee = (Employee) req.getSession().getAttribute(AttributeList.ATTR_USER);
 
-    if(EmployeeValidation.isStringEmpty(id)) {
-      return PageList.WRONG_INPUT;      
-    }
-    
-    if (Long.toString(employee.getId()).equals(id)) {
-      employeeService.updateEmployee(employee);
-      return PageList.PROFILE;
-    } else if (employee.isAdmin()) {
-      Employee processedEmployee = new Employee();
-      processedEmployee.setId(Long.parseLong(id));
-      processedEmployee = employeeService.getEmployeeById(processedEmployee);
-      
-      String position = req.getParameter(ParameterList.POSITION);
-      processedEmployee.setPosition(position);
-      employeeService.updateEmployee(processedEmployee);
-      
-      return PageList.ADMIN_PAGE;
-    } else {
+    if (EmployeeValidation.isStringEmpty(id)) {
       return PageList.WRONG_INPUT;
+    }
+
+    try {
+      if (Long.toString(employee.getId()).equals(id)) {
+        employeeService.updateEmployee(employee);
+        return PageList.PROFILE;
+      } else if (employee.isAdmin()) {
+        Employee processedEmployee = new Employee();
+        processedEmployee.setId(Long.parseLong(id));
+        processedEmployee = employeeService.getEmployeeById(processedEmployee);
+
+        String position = req.getParameter(ParameterList.POSITION);
+        processedEmployee.setPosition(position);
+        employeeService.updateEmployee(processedEmployee);
+
+        return PageList.ADMIN_PAGE;
+      } else {
+        return PageList.WRONG_INPUT;
+      }
+    } catch (ServiceException e) {
+      return PageList.ERROR;
     }
   }
 

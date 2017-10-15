@@ -10,6 +10,7 @@ import com.accounting.command.exception.CommandException;
 import com.accounting.model.Employee;
 import com.accounting.service.EmployeeService;
 import com.accounting.service.ServiceFactory;
+import com.accounting.service.exception.ServiceException;
 
 public class GetAllUsersCommand implements Command {
 
@@ -18,12 +19,16 @@ public class GetAllUsersCommand implements Command {
     EmployeeService employeeService = ServiceFactory.getInstance().getEmployeeService();
     Employee employee = (Employee) req.getSession().getAttribute(AttributeList.ATTR_USER);
 
-    if (employee.isAdmin()) {
-      List<Employee> list = employeeService.getAllEmployees();
-      req.setAttribute(AttributeList.ATTR_USER_LIST, list);
-      return PageList.ADMIN_PAGE;
-    } else {
-      return PageList.WRONG_INPUT;
+    try {
+      if (employee.isAdmin()) {
+        List<Employee> list = employeeService.getAllEmployees();
+        req.setAttribute(AttributeList.ATTR_USER_LIST, list);
+        return PageList.ADMIN_PAGE;
+      } else {
+        return PageList.WRONG_INPUT;
+      }
+    } catch (ServiceException e) {
+      return PageList.ERROR;
     }
   }
 

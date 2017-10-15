@@ -2,19 +2,19 @@ package com.accounting.service;
 
 import java.util.List;
 import com.accounting.model.Employee;
+import com.accounting.service.exception.ServiceException;
 
 public interface EmployeeService {
-  Employee signIn(Employee employee);
+  Employee signIn(Employee employee) throws ServiceException;
 
-  boolean signUp(Employee employee);
+  boolean signUp(Employee employee) throws ServiceException;
   
-  Employee getEmployeeById(Employee employee);
+  Employee getEmployeeById(Employee employee) throws ServiceException;
 
-  void updateEmployee(Employee employee);
+  boolean updateEmployee(Employee employee) throws ServiceException;
 
-  void deleteEmployee(Employee employee);
+  boolean deleteEmployee(Employee employee) throws ServiceException;
   
-  List<Employee> getAllEmployees();
-  
-  void deleteEmployeeByEmail(Employee employee);
+  List<Employee> getAllEmployees() throws ServiceException;
+
 }
