@@ -14,15 +14,16 @@ public class DaoUtil {
 
   private static volatile DaoUtil instance;
   
-  private DaoUtil() {}
-
-  private static void init() throws DaoException {
+  private DaoUtil() throws DaoException {
     try {
       DriverManager.registerDriver(new com.mysql.jdbc.Driver());
+      DBResourceManager resourceManager = DBResourceManager.getInstance();
+      this.url = resourceManager.getValue(DBParameter.DB_URL);
+      this.password = resourceManager.getValue(DBParameter.DB_PASSWORD);
+      this.login = resourceManager.getValue(DBParameter.DB_LOGIN);
     } catch (SQLException e) {
-      throw new DaoException("Exception during init method", e);
+      throw new DaoException("Exception during registering driver", e);
     }
-    
   }
   
   public static DaoUtil getInstance() throws DaoException {
@@ -32,7 +33,6 @@ public class DaoUtil {
         localInstance = instance;
         if(localInstance == null) {
           instance = localInstance= new DaoUtil();
-          init();
         }
       }
     }

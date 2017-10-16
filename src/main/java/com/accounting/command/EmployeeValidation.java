@@ -1,5 +1,6 @@
 package com.accounting.command;
 
+import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.servlet.http.HttpServletRequest;
@@ -27,7 +28,7 @@ public class EmployeeValidation {
     String password = req.getParameter(ParameterList.PSWRD);
     String passwordConfirm = req.getParameter(ParameterList.PSWRD_CONFIRM);
     if (isStringEmpty(password) || password.trim().length() < 5
-        || password.equals(passwordConfirm)) {
+        || !password.equals(passwordConfirm)) {
       return null;
     }
 
@@ -45,12 +46,17 @@ public class EmployeeValidation {
     String email = req.getParameter(ParameterList.EMAIL);
     Pattern emailPattern = Pattern.compile("^(.[^@\\s]+)@(.[^@\\s]+)\\.([a-z]+)$");
     Matcher emailMatcher = emailPattern.matcher(email.trim());
-    if (!isEmailValid(email) || emailMatcher.find()) {
+    if (!isEmailValid(email) || !emailMatcher.find()) {
       return null;
     }
 
-    String birthDate = req.getParameter(ParameterList.POSITION);
+    String birthDate = req.getParameter(ParameterList.BIRTH_DATE);
     if (isStringEmpty(birthDate) || birthDate.trim().length() > 10) {
+      return null;
+    }
+
+    Date birth = DateUtil.getDateRusFormat(birthDate);
+    if (birth.after(new Date())) {
       return null;
     }
 
@@ -64,11 +70,10 @@ public class EmployeeValidation {
       return null;
     }
 
-    Employee employee = new Employee(email.trim(), HashTool.hashLine(password.trim()), name,
-        DateUtil.getDateRusFormat(birthDate), position.trim());
+    Employee employee = new Employee(email.trim(), HashTool.hashLine(password.trim()), name, birth,
+        position.trim());
     employee.setHomeAddress(homeAddress.trim());
     return employee;
   }
-
 
 }

@@ -28,7 +28,7 @@ public class GetAllUsersCommand implements Command {
         return PageList.WRONG_INPUT;
       }
     } catch (ServiceException e) {
-      return PageList.ERROR;
+      throw new CommandException("Error during getting all users", e);
     }
   }
 

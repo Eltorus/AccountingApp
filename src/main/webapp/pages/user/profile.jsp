@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet" href="css/shop.css">
+<link rel="stylesheet" href="css/mainstyle.css">
 <link rel="stylesheet" href="css/bootstrap.min.css">
 <title>Profile</title>
 </head>
@@ -36,41 +36,17 @@
 					<div class="clearfix"></div>
 					<div class="bot-border"></div>
 					<div class="col-md-3 col-xs-6 tital">Experience:</div>
-					<div class="col-md-3">${sessionScope.user.registrationDate}</div>
+					<div class="col-md-3"><fmt:formatDate value="${sessionScope.user.experience}" pattern="DD" var="exp"/></div>
 					<div class="clearfix"></div>
 					<div class="bot-border"></div>
 					<div class="col-md-3 col-xs-6 tital">Home address:</div>
-					<div class="col-md-3">${sessionScope.user.homeAdress}</div>
+					<div class="col-md-3">${sessionScope.user.homeAddress}</div>
 					<div class="clearfix"></div>
 					<div class="bot-border"></div>
 					<div class="col-md-3 col-xs-6 tital">Birth Date:</div>
-					<div class="col-md-3">${sessionScope.user.fullName}</div>
+					<div class="col-md-3"><fmt:formatDate value="${sessionScope.user.birth}" pattern="dd.MM.yyyy" /></div>
 					<div class="clearfix"></div>
 					<div class="bot-border"></div>
-				</div>
-			</div>
-		</div>
-		<div class="modal fade bs-modal-sm" id="img-upload-modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<form class="form-signin" action="Controller" method="post" enctype="multipart/form-data">
-						<div class="modal-body">
-							<div id="myTabContent" class="tab-content">
-								<h4>${upload_img}</h4>
-								<div class="tab-pane fade active in">
-									<input type="hidden" name="command" value="upload_avatar" /> <label class="btn btn-default" for="my-file-selector"> <input
-										id="my-file-selector" type="file" accept="image/*" name="user_avatar" size="60" style="display: none;"
-										onchange="$('#upload-file-info').html($(this).val());"> ${choose}
-									</label>
-								</div>
-								<span class='label label-info' id="upload-file-info"></span>
-							</div>
-						</div>
-						<div class="modal-footer">
-							<button type="submit" class="btn btn-primary btn-md">${upload}</button>
-							<button type="button" class="btn btn-default" data-dismiss="modal">${cancel}</button>
-						</div>
-					</form>
 				</div>
 			</div>
 		</div>
@@ -80,7 +56,7 @@
 					<div class="modal-body">
 						<h4>${r_u_sure}${del_prof}?</h4>
 						<form action="Controller" method="post">
-							<input type="hidden" name="command" value="delete_user" />
+							<input type="hidden" name="cmd" value="deleteUser" />
 							<div class="modal-footer">
 								<button type="submit" class="btn btn-danger">${delete}</button>
 								<button type="button" class="btn btn-default" data-dismiss="modal">${cancel}</button>

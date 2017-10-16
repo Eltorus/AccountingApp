@@ -28,7 +28,7 @@ public class SignInCommand implements Command {
       employee.setEmail(email);
       employee.setPasswordHash(HashTool.hashLine(password));
 
-      if (EmployeeValidation.isEmailAndPswrdValid(employee)) {
+      if (!EmployeeValidation.isEmailAndPswrdValid(employee)) {
         return PageList.WRONG_INPUT;
       }
 
@@ -38,14 +38,16 @@ public class SignInCommand implements Command {
       HttpSession session = req.getSession();
       if (employee != null) {
         session.setAttribute(AttributeList.ATTR_USER, employee);
+        return PageList.PROFILE;
       } else {
         session.setAttribute("error", "Wrong login or password");
+        return PageList.SIGN_IN;
       }
       
-      return PageList.SIGN_IN;
     } catch (UtilException | ServiceException e) {
       // TODO: add logging
-      return PageList.ERROR;
+      System.err.println(e);
+      throw new CommandException("Error during sign in", e);
     }
   }
 

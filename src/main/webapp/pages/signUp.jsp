@@ -6,7 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="css/bootstrap.min.css">
-<link rel="stylesheet" href="css/shop.css">
+<link rel="stylesheet" href="css/mainstyle.css">
 <title>Sign Up</title>
 </head>
 <body>
@@ -18,34 +18,32 @@
 		<fieldset>
 			<div class="container">
 				<form class="form-horizontal" action="Controller" method="post">
-					<input type="hidden" name="command" value="signUp" />
+					<input type="hidden" name="cmd" value="signUp" />
 					<fieldset>
 						<div class="control-group">
 							<label class="control-label">Full Name</label>
 							<div class="controls">
-								<input id="name" name="userName" title="Letters and numbers only, max 45 symbols" class="form-control" pattern=".{45}" type="text"
+								<input id="name" name="userName" title="Letters and numbers only, max 40 symbols" class="form-control" max="40" pattern="\w+" type="text"
 									class="input-large" placeholder="Full Name" required>
 							</div>
 						</div>
 						<div class="control-group">
 							<label class="control-label">Birth Date</label>
 							<div class="controls">
-								<input required id="datepicker" placeholder="Birth Date" name="delivery_date" title="dd.MM.YYYY" pattern="^[0-9]{2}\.[0-9]{2}\.[0-9]{4}$"
-									type="text" class="form-control input-medium" required>
+								<input required id="datepicker" placeholder="Birth Date" name="birthDate" type="text" class="form-control input-medium" required>
 							</div>
 						</div>
 						<div class="control-group">
 							<label class="control-label" for="Position">Position</label>
 							<div class="controls">
-								<input id="password" class="form-control" name="userPswrd" title="Must be at least 5 symbols" max="25" pattern="\w*" placeholder="Position"
+								<input class="form-control" name="userPosition" title="Must be at least 5 symbols" max="25" pattern="\w*" placeholder="Position"
 									class="input-large" required>
 							</div>
 						</div>
 						<div class="control-group">
 							<label class="control-label" for="Home Address">Home Address</label>
 							<div class="controls">
-								<input id="password" class="form-control" name="homeAddress" max="45" pattern=".*" placeholder="Home Address"
-									class="input-large" required>
+								<input class="form-control" name="homeAddress" max="45" pattern=".*" placeholder="Home Address" class="input-large" required>
 							</div>
 						</div>
 						<div class="control-group">
@@ -87,6 +85,7 @@
 	<script src="js/jquery-3.1.1.min.js"></script>
 	<script src="js/jquery.maskedinput.min.js"></script>
 	<script src="js/reg_script.js"></script>
+	<script src="js/address-date.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 </body>
 </html>

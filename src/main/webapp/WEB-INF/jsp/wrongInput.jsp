@@ -5,7 +5,7 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<style><%@include file="/css/bootstrap.min.css" %></style>
-	<title>Error</title>
+	<title>Wrong Input</title>
 </head>
 <body>
 	<div class="container">

@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<link rel="stylesheet" href="css/shop.css">
+	<link rel="stylesheet" href="css/mainstyle.css">
 	<link rel="stylesheet" href="css/bootstrap.min.css">
 	<title>Authorization</title>
 </head>
@@ -20,7 +20,7 @@
 			<h2>Sign in to continue</h2> 
 				<div class="form-login">
 					<form class="form-signin" action="Controller" method="post">
-						<input type="hidden" name="command" value="signIn" />
+						<input type="hidden" name="cmd" value="signIn" />
 						<h2 class="form-signin-heading">${message}</h2>
 						<input type="email" id="inputEmail" class="form-control input-sm chat-input" placeholder="Email" name="userEmail" required autofocus> <br />
 						<input type="password" id="inputPassword" class="form-control input-sm chat-input" placeholder="Password" name="userPswrd" required> <br />

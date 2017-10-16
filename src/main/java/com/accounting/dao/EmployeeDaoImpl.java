@@ -51,7 +51,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
         result = getQueryResult(rs);
       }
     } catch (SQLException | UtilException e) {
-      throw new DaoException("Exception during adding employee", e);
+      throw new DaoException("Exception during getting employee", e);
     } finally {
       daoUtil.closeConnection(con, ps);
     }
@@ -72,7 +72,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
       ps.setString(4, employee.getEmail());
       return ps.executeUpdate() != 0;
     } catch (SQLException e) {
-      throw new DaoException("Exception during adding employee", e);
+      throw new DaoException("Exception during updating employee", e);
     } finally {
       daoUtil.closeConnection(con, ps);
     }
@@ -89,7 +89,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
       ps.setString(1, employee.getEmail());
       return ps.executeUpdate() != 0;
     } catch (SQLException e) {
-      throw new DaoException("Exception during adding employee", e);
+      throw new DaoException("Exception during deleting employee", e);
     } finally {
       daoUtil.closeConnection(con, ps);
     }
@@ -110,7 +110,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
         result.add(getQueryResult(rs));
       }
     } catch (SQLException | UtilException e) {
-      throw new DaoException("Exception during adding employee", e);
+      throw new DaoException("Exception during getting employees", e);
     } finally {
       daoUtil.closeConnection(con, ps);
     }
@@ -127,13 +127,13 @@ public class EmployeeDaoImpl implements EmployeeDao {
       con = daoUtil.getConnection();
       ps = con.prepareStatement(QueryList.SELECT_BY_EMAIL_AND_PSWRD);
       ps.setString(1, employee.getEmail());
-      ps.setString(1, employee.getPasswordHash());
+      ps.setString(2, employee.getPasswordHash());
       ResultSet rs = ps.executeQuery();
       while(rs.next()) {
         result = getQueryResult(rs);
       }
     } catch (SQLException | UtilException e) {
-      throw new DaoException("Exception during adding employee", e);
+      throw new DaoException("Exception during getting employee", e);
     } finally {
       daoUtil.closeConnection(con, ps);
     }

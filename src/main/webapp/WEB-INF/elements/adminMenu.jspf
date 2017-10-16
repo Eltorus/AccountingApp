@@ -8,7 +8,7 @@
 	<a href="#" data-toggle="collapse" data-target="#userMenu">Menu <i class="glyphicon glyphicon-chevron-down"></i></a>
 	<div class="list-group" id="userMenu">
 		<form action="Controller" method="get">
-			<input type="hidden" name="command" value="admin_user_page" />
+			<input type="hidden" name="cmd" value="admin_user_page" />
 			<button type="submit" class="btn-link">Users</button>
 		</form>
 	</div>

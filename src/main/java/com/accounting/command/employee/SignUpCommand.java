@@ -26,11 +26,12 @@ public class SignUpCommand implements Command {
           req.getSession().setAttribute(AttributeList.ATTR_USER, employee);
           return PageList.PROFILE;
         }
-      } 
-        return PageList.WRONG_INPUT;
+      }
+
+      return PageList.WRONG_INPUT;
     } catch (UtilException | ServiceException e) {
       // TODO: logging
-      return PageList.ERROR;
+      throw new CommandException("Error during sign up", e);
     }
   }
 }

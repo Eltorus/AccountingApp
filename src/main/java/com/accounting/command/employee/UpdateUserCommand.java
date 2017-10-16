@@ -44,7 +44,8 @@ public class UpdateUserCommand implements Command {
         return PageList.WRONG_INPUT;
       }
     } catch (ServiceException e) {
-      return PageList.ERROR;
+      System.err.println(e);
+      throw new CommandException("Error during updating user", e);
     }
   }
 

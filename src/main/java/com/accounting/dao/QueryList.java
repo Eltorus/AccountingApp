@@ -11,7 +11,7 @@ public class QueryList {
           + "WHERE `id` = ? AND AND deleted=false";
 
   public static final String SELECT_BY_EMAIL_AND_PSWRD =
-      "SELECT `id`, `email`,`password`, `full_name`, `birth`, `position`, `registration_date`, `home_address`,`admin` "
+      "SELECT `id`, `email` ,`password`, `full_name`, `birth`, `position`, `registration_date`, `home_address`,`admin` "
           + "FROM accounting.employees "
           + "WHERE `email` = ? AND `password` = ? AND deleted=false";
 

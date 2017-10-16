@@ -10,10 +10,3 @@ $('#address').on('keyup', function() {
 		$('#purchase').prop('disabled', true);
 	}
 });
-
-$("#submit-order-info").click(function(){
-	var complitedChecked = $('#order-complited').is(':checked'); 
-	if(!complitedChecked) {
-		$('#datepicker').prop('required', false);
-	}
-}); 

@@ -1,6 +1,7 @@
 package com.accounting.controller;
 
 import java.io.IOException;
+import java.util.Arrays;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -34,6 +35,7 @@ public class DispatcherServlet extends HttpServlet {
       Command command = provider.getCommand(cmdName);
       return command.execute(request, response);
     } catch (CommandException e) {
+      e.printStackTrace();
       return PageList.ERROR;
     }
   }
