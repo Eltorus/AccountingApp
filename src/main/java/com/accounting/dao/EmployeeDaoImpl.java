@@ -45,7 +45,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
     try {
       con = daoUtil.getConnection();
       ps = con.prepareStatement(QueryList.SELECT_BY_EMAIL);
-      ps.setLong(1, employee.getId());
+      ps.setString(1, employee.getEmail());
       ResultSet rs = ps.executeQuery();
       while(rs.next()) {
         result = getQueryResult(rs);

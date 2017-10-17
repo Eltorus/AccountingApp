@@ -44,11 +44,9 @@
 							<td><fmt:formatDate value="${user.experience}" pattern="DD" /></td>
 							<td>${user.homeAddress}</td>
 							<td>${user.admin}</td>
-							<td>
-							<c:if test="${sessionScope.user.id != user.id}">
-								<button type="button" id="userUpdate-modal" class="btn btn-default btn-md" data-toggle="modal" data-target="#userUpdate">Edit</button>
-							</c:if>
-							</td>
+							<td><c:if test="${sessionScope.user.id != user.id}">
+									<button type="button" id="userUpdate-modal" class="btn btn-default btn-md" data-toggle="modal" data-target="#userUpdate">Edit</button>
+								</c:if></td>
 						</tr>
 					</c:forEach>
 				</tbody>
@@ -58,6 +56,13 @@
 			<div class="modal-dialog modal-sm">
 				<div class="modal-content">
 					<div class="modal-body">
+					<form action="Controller" method="post">
+							<input type="hidden" name="cmd" value="deleteUser" /> 
+							<input type="hidden" id="userEmail" name="userEmail" value="" />
+							<div class="modal-footer">
+								<button type="submit" class="btn btn-danger" id="deleteUser">Delete user</button>
+							</div>
+						</form>
 						<form action="Controller" method="post">
 							<input type="hidden" name="cmd" value="updateUser" /> 
 							<input type="hidden" id="userEmail" name="userEmail" value="" />
@@ -65,12 +70,11 @@
 								<div class="control-group">
 									<label class="control-label">Position:</label>
 									<div class="controls">
-										<input id="userPosition" id="userPosition" name="userPosition" title="Letters and numbers only, max 25 symbols" class="form-control" max="25" pattern="\w+" type="text"
-											class="input-large" placeholder="" required>
+										<input id="userPosition" id="userPosition" name="userPosition" title="Letters and numbers only, max 25 symbols" class="form-control"
+											max="25" pattern="\w+" type="text" class="input-large" placeholder="" required>
 									</div>
 								</div>
-								<label class="control-label">Is Admin:</label> 
-								<select class="form-control" name="userIsAdmin" id="userIsAdmin">
+								<label class="control-label">Is Admin:</label> <select class="form-control" name="userIsAdmin" id="userIsAdmin">
 									<option value="1">Yes</option>
 									<option value="2">No</option>
 								</select>

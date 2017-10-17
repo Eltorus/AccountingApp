@@ -8,12 +8,12 @@ public class QueryList {
   public static final String SELECT_BY_EMAIL =
       "SELECT `id`, `email`,`password`, `full_name`, `birth`, `position`, `registration_date`, `home_address`, `admin` "
           + "FROM accounting.employees " 
-          + "WHERE `email` = ? AND deleted=false";
+          + "WHERE `email` = ? AND `deleted`=false";
 
   public static final String SELECT_BY_EMAIL_AND_PSWRD =
       "SELECT `id`, `email` ,`password`, `full_name`, `birth`, `position`, `registration_date`, `home_address`,`admin` "
           + "FROM accounting.employees "
-          + "WHERE `email` = ? AND `password` = ? AND deleted=false";
+          + "WHERE `email` = ? AND `password` = ? AND `deleted`=false";
 
   public static final String UPDATE_EMPLOYEE =
       "UPDATE accounting.employees SET `position`=?, `home_address`=?, `admin`=? WHERE `email`=? AND deleted=false ";
@@ -25,6 +25,7 @@ public class QueryList {
   
   public static final String SELECT_ALL_EMPLOYEES =
       "SELECT `id`, `email`,`password`, `full_name`, `birth`, `position`, `registration_date`, `home_address`, `admin`"
-    + "FROM accounting.employees";
+    + "FROM accounting.employees "
+    + "WHERE `deleted`=false";
 
 }

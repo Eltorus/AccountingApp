@@ -10,6 +10,10 @@
 	color: #ffffff;
 }
 
+.modal-footer {
+	border-top: 0;
+}
+
 .navbar .navbar-brand {
   color: #ecf0f1;
 }

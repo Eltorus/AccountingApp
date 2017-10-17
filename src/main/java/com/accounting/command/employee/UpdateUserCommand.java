@@ -17,21 +17,20 @@ public class UpdateUserCommand implements Command {
 
   @Override
   public String execute(HttpServletRequest req, HttpServletResponse resp) throws CommandException {
-    EmployeeService employeeService = ServiceFactory.getInstance().getEmployeeService();
-
     String email = req.getParameter(ParameterList.EMAIL);
-
     if (EmployeeValidation.isStringEmpty(email)) {
       return PageList.WRONG_INPUT;
     }
 
     Employee employee = (Employee) req.getSession().getAttribute(AttributeList.ATTR_USER);
+    EmployeeService employeeService = ServiceFactory.getInstance().getEmployeeService();
     try {
       if (email.equals(employee.getEmail())) {
         String homeAddress = req.getParameter(ParameterList.HOME_ADDRESS);
         if (EmployeeValidation.isStringEmpty(homeAddress)) {
           return PageList.WRONG_INPUT;
         }
+        
         employee.setHomeAddress(homeAddress);
         employeeService.updateEmployee(employee);
         req.getSession().setAttribute(AttributeList.ATTR_USER, employee);
@@ -40,7 +39,6 @@ public class UpdateUserCommand implements Command {
         Employee processedEmployee = new Employee();
         processedEmployee.setEmail(email);
         processedEmployee = employeeService.getEmployeeByEmail(processedEmployee);
-
         String position = req.getParameter(ParameterList.POSITION);
         processedEmployee.setPosition(position);
 
