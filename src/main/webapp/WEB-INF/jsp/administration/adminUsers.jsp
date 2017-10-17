@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html>
@@ -13,8 +13,8 @@
 <title>Administration</title>
 </head>
 <body>
-	<c:if test="${sessionScope.user.admin != true}">
-		<c:redirect url="/" />
+	<c:if test="${!sessionScope.user.admin}">
+		<c:redirect url="profile" />
 	</c:if>
 	<%@ include file="/WEB-INF/elements/header.jspf"%>
 	<div class="container-fluid">
@@ -30,6 +30,7 @@
 						<th>Experience</th>
 						<th>Home Address</th>
 						<th>Admin</th>
+						<th></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -38,49 +39,45 @@
 							<td>${user.id}</td>
 							<td><c:out value="${user.fullName}" /></td>
 							<td>${user.email}</td>
-							<td>${user.birth}</td>
+							<td><fmt:formatDate value="${user.birth}" pattern="dd.MM.YYYY" /></td>
 							<td>${user.position}</td>
-							<td>${user.experience}</td>
+							<td><fmt:formatDate value="${user.experience}" pattern="DD" /></td>
 							<td>${user.homeAddress}</td>
-							<td>${user.admin}"></td>
+							<td>${user.admin}</td>
 							<td>
-								<form action="Controller" method="post">
-									<input type="hidden" name="command" value="update_ban_status" /> <input type="hidden" name="user_id" value="${user.id}" /> <input
-										type="hidden" name="user_banned" value="${user.banned}" />
-									<c:choose>
-										<c:when test="${user.banned == true}">
-											<button type="submit" id="updateUser" class="btn btn-danger btn-md">${banned}</button>
-										</c:when>
-										<c:otherwise>
-											<button type="submit" id="updateUser" class="btn btn-primary btn-md">${n_banned}</button>
-										</c:otherwise>
-									</c:choose>
-								</form>
-							</td>
-							<td>
-								<button type="button" id="discount-modal" class="btn btn-default btn-md" data-toggle="modal" data-target="#user-discount">${set_discount}</button>
+							<c:if test="${sessionScope.user.id != user.id}">
+								<button type="button" id="userUpdate-modal" class="btn btn-default btn-md" data-toggle="modal" data-target="#userUpdate">Edit</button>
+							</c:if>
 							</td>
 						</tr>
 					</c:forEach>
 				</tbody>
 			</table>
 		</div>
-		<div class="modal fade bs-modal-sm" id="user-discount" tabindex="-1" role="dialog" aria-hidden="true">
+		<div class="modal fade bs-modal-sm" id="userUpdate" tabindex="-1" role="dialog" aria-hidden="true">
 			<div class="modal-dialog modal-sm">
 				<div class="modal-content">
 					<div class="modal-body">
 						<form action="Controller" method="post">
-							<input type="hidden" name="command" value="update_user_discount" /> <input type="hidden" id="user_id" name="user_id" value="" />
+							<input type="hidden" name="cmd" value="updateUser" /> 
+							<input type="hidden" id="userEmail" name="userEmail" value="" />
 							<div class="control-group">
-								<label class="control-label">${discount} :</label> <select class="form-control" name="user_discount">
-									<option value="1">0%</option>
-									<option value="2">5%</option>
-									<option value="3">10%</option>
+								<div class="control-group">
+									<label class="control-label">Position:</label>
+									<div class="controls">
+										<input id="userPosition" id="userPosition" name="userPosition" title="Letters and numbers only, max 25 symbols" class="form-control" max="25" pattern="\w+" type="text"
+											class="input-large" placeholder="" required>
+									</div>
+								</div>
+								<label class="control-label">Is Admin:</label> 
+								<select class="form-control" name="userIsAdmin" id="userIsAdmin">
+									<option value="1">Yes</option>
+									<option value="2">No</option>
 								</select>
 							</div>
 							<div class="modal-footer">
-								<button type="submit" id="updateUser" class="btn btn-default btn-md">${submit}</button>
-								<button type="button" class="btn btn-default" data-dismiss="modal">${close}</button>
+								<button type="submit" id="updateUser" class="btn btn-default btn-md">Submit</button>
+								<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 							</div>
 						</form>
 					</div>
@@ -88,10 +85,10 @@
 			</div>
 		</div>
 	</div>
-	<script src="js/jquery-3.1.1.min.js"></script>
-	<script src="js/modalUser.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-	<script src="js/scripts.js"></script>
+	<script src="js/jquery-3.1.1.min.js?1500"></script>
+	<script src="js/modalUser.js?1500"></script>
+	<script src="js/bootstrap.min.js?1500"></script>
+	<script src="js/scripts.js?1500"></script>
 </body>
 </body>
 </html>

@@ -37,14 +37,14 @@ public class EmployeeDaoImpl implements EmployeeDao {
   }
 
   @Override
-  public Employee getEmployeeById(Employee employee) throws DaoException{
+  public Employee getEmployeeByEmail(Employee employee) throws DaoException{
     Employee result = null;
     Connection con = null;
     PreparedStatement ps = null;
     DaoUtil daoUtil = DaoUtil.getInstance();
     try {
       con = daoUtil.getConnection();
-      ps = con.prepareStatement(QueryList.SELECT_BY_ID);
+      ps = con.prepareStatement(QueryList.SELECT_BY_EMAIL);
       ps.setLong(1, employee.getId());
       ResultSet rs = ps.executeQuery();
       while(rs.next()) {
@@ -85,7 +85,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
     DaoUtil daoUtil = DaoUtil.getInstance();
     try {
       con = daoUtil.getConnection();
-      ps = con.prepareStatement(QueryList.UPDATE_EMPLOYEE);
+      ps = con.prepareStatement(QueryList.DELETE_EMPLOYEE);
       ps.setString(1, employee.getEmail());
       return ps.executeUpdate() != 0;
     } catch (SQLException e) {

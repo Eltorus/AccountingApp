@@ -19,17 +19,14 @@ public class SignUpCommand implements Command {
   public String execute(HttpServletRequest req, HttpServletResponse resp) throws CommandException {
     try {
       Employee employee = EmployeeValidation.isEmployeeValid(req);
-      if (employee != null) {
-        EmployeeService employeeService = ServiceFactory.getInstance().getEmployeeService();
-        if (employeeService.signUp(employee)) {
-          System.err.println(employee);
-          req.getSession().setAttribute(AttributeList.ATTR_USER, employee);
-          return PageList.PROFILE;
-        }
+      EmployeeService employeeService = ServiceFactory.getInstance().getEmployeeService();
+      if (employee == null || !employeeService.signUp(employee)) {
+        return PageList.WRONG_INPUT;
       }
 
-      return PageList.WRONG_INPUT;
-    } catch (UtilException | ServiceException e) {
+      req.getSession().setAttribute(AttributeList.ATTR_USER, employee);
+      return PageList.PROFILE;
+    } catch (UtilException |ServiceException e) {
       // TODO: logging
       throw new CommandException("Error during sign up", e);
     }

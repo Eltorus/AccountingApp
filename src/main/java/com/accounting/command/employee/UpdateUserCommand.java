@@ -19,27 +19,40 @@ public class UpdateUserCommand implements Command {
   public String execute(HttpServletRequest req, HttpServletResponse resp) throws CommandException {
     EmployeeService employeeService = ServiceFactory.getInstance().getEmployeeService();
 
-    String id = req.getParameter(ParameterList.ID);
-    Employee employee = (Employee) req.getSession().getAttribute(AttributeList.ATTR_USER);
+    String email = req.getParameter(ParameterList.EMAIL);
 
-    if (EmployeeValidation.isStringEmpty(id)) {
+    if (EmployeeValidation.isStringEmpty(email)) {
       return PageList.WRONG_INPUT;
     }
 
+    Employee employee = (Employee) req.getSession().getAttribute(AttributeList.ATTR_USER);
     try {
-      if (Long.toString(employee.getId()).equals(id)) {
+      if (email.equals(employee.getEmail())) {
+        String homeAddress = req.getParameter(ParameterList.HOME_ADDRESS);
+        if (EmployeeValidation.isStringEmpty(homeAddress)) {
+          return PageList.WRONG_INPUT;
+        }
+        employee.setHomeAddress(homeAddress);
         employeeService.updateEmployee(employee);
+        req.getSession().setAttribute(AttributeList.ATTR_USER, employee);
         return PageList.PROFILE;
       } else if (employee.isAdmin()) {
         Employee processedEmployee = new Employee();
-        processedEmployee.setId(Long.parseLong(id));
-        processedEmployee = employeeService.getEmployeeById(processedEmployee);
+        processedEmployee.setEmail(email);
+        processedEmployee = employeeService.getEmployeeByEmail(processedEmployee);
 
         String position = req.getParameter(ParameterList.POSITION);
         processedEmployee.setPosition(position);
-        employeeService.updateEmployee(processedEmployee);
 
-        return PageList.ADMIN_PAGE;
+        String admin = req.getParameter(ParameterList.ADMIN);
+        if (admin.equals("1")) {
+          processedEmployee.setAdmin(true);
+        } else {
+          processedEmployee.setAdmin(false);
+        }
+
+        employeeService.updateEmployee(processedEmployee);
+        return PageList.ADMIN_PAGE_REDIRECT;
       } else {
         return PageList.WRONG_INPUT;
       }

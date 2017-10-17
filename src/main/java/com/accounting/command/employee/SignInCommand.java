@@ -29,7 +29,7 @@ public class SignInCommand implements Command {
       employee.setPasswordHash(HashTool.hashLine(password));
 
       if (!EmployeeValidation.isEmailAndPswrdValid(employee)) {
-        return PageList.WRONG_INPUT;
+        return PageList.SIGN_IN;
       }
 
       EmployeeService employeeService = ServiceFactory.getInstance().getEmployeeService();
@@ -40,8 +40,7 @@ public class SignInCommand implements Command {
         session.setAttribute(AttributeList.ATTR_USER, employee);
         return PageList.PROFILE;
       } else {
-        session.setAttribute("error", "Wrong login or password");
-        return PageList.SIGN_IN;
+        return PageList.WRONG_INPUT;
       }
       
     } catch (UtilException | ServiceException e) {

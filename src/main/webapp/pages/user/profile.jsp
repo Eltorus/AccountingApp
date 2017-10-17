@@ -12,7 +12,7 @@
 <body>
 	<%@ include file="/WEB-INF/elements/header.jspf"%>
 	<c:if test="${empty sessionScope.user}">
-		<c:redirect url="signin" />
+		<c:redirect url="/" />
 	</c:if>
 	<div class="container">
 		<div class="panel-body">
@@ -36,7 +36,7 @@
 					<div class="clearfix"></div>
 					<div class="bot-border"></div>
 					<div class="col-md-3 col-xs-6 tital">Experience:</div>
-					<div class="col-md-3"><fmt:formatDate value="${sessionScope.user.experience}" pattern="DD" var="exp"/></div>
+					<div class="col-md-3"><fmt:formatDate value="${sessionScope.user.experience}" pattern="DD"/></div>
 					<div class="clearfix"></div>
 					<div class="bot-border"></div>
 					<div class="col-md-3 col-xs-6 tital">Home address:</div>
@@ -54,12 +54,13 @@
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-body">
-						<h4>${r_u_sure}${del_prof}?</h4>
+						<h4>Are you sure you want to delete the profile?</h4>
 						<form action="Controller" method="post">
 							<input type="hidden" name="cmd" value="deleteUser" />
+							<input type="hidden" name="userEmail" value="${sessionScope.user.email}" />
 							<div class="modal-footer">
-								<button type="submit" class="btn btn-danger">${delete}</button>
-								<button type="button" class="btn btn-default" data-dismiss="modal">${cancel}</button>
+								<button type="submit" class="btn btn-danger">Delete</button>
+								<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
 							</div>
 						</form>
 					</div>

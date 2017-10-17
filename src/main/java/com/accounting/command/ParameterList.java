@@ -9,4 +9,5 @@ public class ParameterList {
   public static final String POSITION = "userPosition";
   public static final String HOME_ADDRESS = "homeAddress";
   public static final String BIRTH_DATE = "birthDate";
+  public static final String ADMIN = "userIsAdmin";
 }

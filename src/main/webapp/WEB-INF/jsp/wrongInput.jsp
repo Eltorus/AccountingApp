@@ -11,7 +11,7 @@
 	<div class="container">
 		<div class="row text-center">
 			<h1>Error</h1>
-			<br /> <a href="<c:url value="/"/>">On main</a>
+			<br /> <a href="<c:url value="/"/>">Wrong Input</a>
 		</div>
 	</div>
 </body>

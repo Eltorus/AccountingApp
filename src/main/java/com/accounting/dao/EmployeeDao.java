@@ -7,7 +7,7 @@ import com.accounting.model.Employee;
 public interface EmployeeDao {
   boolean addEmployee(Employee employee) throws DaoException;
 
-  Employee getEmployeeById(Employee employee) throws DaoException;
+  Employee getEmployeeByEmail(Employee employee) throws DaoException;
 
   Employee getEmployeeByEmailAndPswrd(Employee employee) throws DaoException;
 

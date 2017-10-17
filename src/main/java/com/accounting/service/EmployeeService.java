@@ -9,8 +9,8 @@ public interface EmployeeService {
 
   boolean signUp(Employee employee) throws ServiceException;
   
-  Employee getEmployeeById(Employee employee) throws ServiceException;
-
+  Employee getEmployeeByEmail(Employee employee) throws ServiceException;
+  
   boolean updateEmployee(Employee employee) throws ServiceException;
 
   boolean deleteEmployee(Employee employee) throws ServiceException;

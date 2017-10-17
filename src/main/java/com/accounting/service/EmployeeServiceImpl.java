@@ -58,9 +58,9 @@ public class EmployeeServiceImpl implements EmployeeService {
   }
   
   @Override
-  public Employee getEmployeeById(Employee employee) throws ServiceException {
+  public Employee getEmployeeByEmail(Employee employee) throws ServiceException {
     try {
-      return employeeDao.getEmployeeById(employee);
+      return employeeDao.getEmployeeByEmail(employee);
     } catch (DaoException e) {
       throw new ServiceException("Excpetion during getEmployeeById", e);
     }

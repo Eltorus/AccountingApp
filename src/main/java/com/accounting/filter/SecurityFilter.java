@@ -25,11 +25,9 @@ public class SecurityFilter implements Filter {
     Employee employee = (Employee) request.getSession().getAttribute(AttributeList.ATTR_USER);
 
     String page = null;
-    if (employee != null) {
-      String command = request.getParameter(CommandList.CMD);
-      if (isAdminCommand(command) && !employee.isAdmin()) {
-        page = PageList.PROFILE;
-      }
+    String command = request.getParameter(CommandList.CMD);
+    if (isAdminCommand(command) && (employee == null || !employee.isAdmin())) {
+        page = PageList.SIGN_IN;
     }
 
     if (page != null) {
@@ -38,7 +36,6 @@ public class SecurityFilter implements Filter {
       chain.doFilter(req, res);
     }
   }
-
 
   private boolean isAdminCommand(String command) {
     return CommandList.GET_ALL_USERS.equals(command);
