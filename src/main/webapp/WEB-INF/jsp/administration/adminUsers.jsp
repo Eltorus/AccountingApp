@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="generator" content="Bootply" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<link rel="stylesheet" href="css/mainstyle.css">
+<link rel="stylesheet" href="css/mainstyle.css?2">
 <link rel="stylesheet" href="css/bootstrap.min.css">
 <link rel="stylesheet" href="css/adminstyle.css">
 <title>Administration</title>
@@ -22,14 +22,14 @@
 			<table class="table table-sm table-hover" id="users-table">
 				<thead>
 					<tr>
-						<th>ID</th>
-						<th>Full Name</th>
-						<th>Email</th>
-						<th>Birth Date</th>
-						<th>Position</th>
-						<th>Experience</th>
-						<th>Home Address</th>
-						<th>Admin</th>
+						<th onclick="sortTable(0)" class="user-table-th">ID</th>
+						<th onclick="sortTable(1)" class="user-table-th">Full Name</th>
+						<th onclick="sortTable(2)" class="user-table-th">Email</th>
+						<th onclick="sortTable(3)" class="user-table-th">Birth Date</th>
+						<th onclick="sortTable(4)" class="user-table-th">Position</th>
+						<th onclick="sortTable(5)" class="user-table-th">Experience</th>
+						<th onclick="sortTable(6)" class="user-table-th">Home Address</th>
+						<th onclick="sortTable(7)" class="user-table-th">Admin</th>
 						<th></th>
 					</tr>
 				</thead>
@@ -45,7 +45,7 @@
 							<td>${user.homeAddress}</td>
 							<td>${user.admin}</td>
 							<td><c:if test="${sessionScope.user.id != user.id}">
-									<button type="button" id="userUpdate-modal" class="btn btn-default btn-md" data-toggle="modal" data-target="#userUpdate">Edit</button>
+									<button type="button" id="userUpdate-modal" class="btn btn-default btn-sm" data-toggle="modal" data-target="#userUpdate">Edit</button>
 								</c:if></td>
 						</tr>
 					</c:forEach>
@@ -91,6 +91,7 @@
 	</div>
 	<script src="js/jquery-3.1.1.min.js?1500"></script>
 	<script src="js/modalUser.js?1500"></script>
+	<script src="js/sortingScript.js?1500"></script>
 	<script src="js/bootstrap.min.js?1500"></script>
 	<script src="js/scripts.js?1500"></script>
 </body>

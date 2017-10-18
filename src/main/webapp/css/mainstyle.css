@@ -197,3 +197,7 @@ img.product {
 		width: 102%;
 	}
 }
+
+.user-table-th {
+  cursor: pointer;
+}
